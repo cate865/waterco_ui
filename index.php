@@ -1,1 +1,2 @@
-<?php echo 'Water Company Final Project UI'; ?>
+<title>Water Company Dashboard</title>
+<?php echo 'Water Company Final Project U'; ?>
