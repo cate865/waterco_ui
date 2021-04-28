@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <title>Billing</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./index.html">Water CO</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./index.html">Home</a></li>
+                <li><a href="./client.html">Clients</a></li>
+                <li><a href="./premises.html">Premises</a></li>
+                <li><a href="./routes.html">Routes</a></li>
+                <li><a href="./bill.html">Billing</a></li>
+                <li><a href="./payment.html">Payments</a></li>
+                <li><a href="./billers.html">All Billers</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./newbiller.html"><span class="glyphicon glyphicon-user"></span> Create Biller</a></li>
+                <li><a href="./loginbiller.html"><span class="glyphicon glyphicon-log-in"></span> Biller Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="allbills">
+        <form action="" method="post" style="margin-bottom: 20px;">
+            <input type="text" name="clientid" placeholder="Client ID ..." />
+            <input type="text" name="premiseid" placeholder="Premise ID ..." />
+            <select placeholder="MM">
+                <option name="" value="" style="display:none;">MM</option>
+                <option name="January" value="Jan">January</option>
+                <option name="February" value="Feb">February</option>
+                <option name="March" value="Mar">March</option>
+                <option name="April" value="Apr">April</option>
+                <option name="May" value="May">May</option>
+                <option name="June" value="Jun">June</option>
+                <option name="July" value="Jul">July</option>
+                <option name="August" value="Aug">August</option>
+                <option name="September" value="Sep">September</option>
+                <option name="October" value="Oct">October</option>
+                <option name="November" value="Nov">November</option>
+                <option name="December" value="Dec">December</option>
+            </select>
+            <input type="number" name="reading" placeholder="Reading ..." />
+            <input type="text" name="billerid" placeholder="Biller ID ..." />
+            <input type="submit" name="signup_submit" value="Send Bill" /> <br>
+        </form>
+        <table>
+            <tr>
+                <th>Bill ID</th>
+                <th>Client ID</th>
+                <th>Premise ID</th>
+                <th>Biller ID</th>
+                <th>Reading</th>
+                <th>Bill Status</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>

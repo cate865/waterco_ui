@@ -1,0 +1,94 @@
+body {
+    background-color: #2A1B3D;
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.billers > .vone > .h4{
+    float: left;
+    padding-left: 7%;
+    margin-bottom: 5px;
+}
+
+.viewbiller {
+    display: grid;
+    place-items: center;
+}
+
+.viewbiller > .bdetails > .readdetails {
+    margin-left: 40%;
+}
+
+.viewbiller > .bdetails > form > input{
+    margin-top: 10%;
+    color: black;
+}
+
+.viewbiller > .bdetails > form > input[type="submit"]{
+    background-color: black;
+    color: white;
+    padding: 2%;
+    margin-left: 20%
+}
+
+table {
+    background-color: #684e8a;
+    width: 90%;
+}
+
+table > tr {
+    text-align: left;
+}
+
+table > tr > th {
+    background-color: #dfd2f0;
+    color: black;
+}
+
+table > tr > td {
+    color: white;
+}
+
+.viewclient {
+    display: grid;
+    place-items: center;
+}
+
+.viewclient > .cdetails > .readdetails {
+    margin-left: 40%;
+}
+
+.viewclient > .cdetails > form > input{
+    margin-top: 10%;
+    color: black;
+}
+
+.viewclient > .cdetails > form > input[type="submit"]{
+    background-color: black;
+    color: white;
+    padding: 2%;
+    margin-left: 20%
+}
+
+select{
+	font-size:18px;
+}
+
+form {
+    color: black;
+}
+
+.dashboard {
+    position: relative;
+}
+
+.droutes, .dbills, .dpremises {
+    float: left;
+    margin-right: 4%;
+    margin-top: 11%;
+    background-color: #080808;
+    color: white;
+    padding: 5px;
+    border-radius: 20px;
+}
