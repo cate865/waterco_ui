@@ -33,11 +33,10 @@
     </nav>
 
     <div class="allbills">
-        <form action="" method="post" style="margin-bottom: 20px;">
-            <input type="text" name="clientid" placeholder="Client ID ..." />
-            <input type="text" name="premiseid" placeholder="Premise ID ..." />
-            <input type="number" name="reading" placeholder="Reading ..." />
-            <input type="text" name="billerid" placeholder="Biller ID ..." />
+        <form action="http://localhost:5000/bills" method="post" style="margin-bottom: 20px;">
+            <input type="number" name="PremiseId" placeholder="Premise ID ..." />
+            <input type="number" name="UserID" placeholder="Biller ID ..." />
+            <input type="number" name="Reading" placeholder="Reading ..." />
             <input type="submit" name="signup_submit" value="Send Bill" /> <br>
         </form>
         <table>

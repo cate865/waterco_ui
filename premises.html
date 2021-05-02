@@ -34,25 +34,30 @@
         <a href="./addpremise.html" style="text-decoration: none; color: white; background-color: #16a085;">Add a Premise</a>
         <h2>All Premises</h2>
         <button style="color: black; margin-bottom: 1%;">Sort by client</button>
-        <table>
-            <tr>
-                <th>PremiseID</th>
-                <th>Client ID</th>
-                <th>Route ID</th>
-                <th>Meter No</th>
-                <th>View</th>
-            </tr>
-            <tr>
-                <td>Val</td>
-                <td>Val</td>
-                <td>Val</td>
-                <td>Val</td>
+        <table id="allpr">
+            <thead>
+                <tr>
+                    <th>PremiseID</th>
+                    <th>MeterNo</th>
+                    <th>Customerid</th>
+                    <th>RID</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" style="color: white;" >
+            </tbody>
+            <!-- <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td><a href="./premiseview.html" style="text-decoration: none; color: inherit;">View</a></td>
-            </tr>
+            </tr> -->
         </table>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

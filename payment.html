@@ -33,9 +33,11 @@
     </nav>
 
     <div class="allbills">
-        <form action="" method="post" style="margin-bottom: 20px;">
-            <input type="text" name="billid" placeholder="Bill ID ..." />
-            <input type="text" name="payment" placeholder="Payment ID ..." />
+        <form action="http://localhost:5000/payments" method="post" style="margin-bottom: 20px;">
+            <input type="number" name="BID" placeholder="Bill ID ..." />
+            <input type="number" name="ExpectedAmount" placeholder="Expected Payment ..." />
+            <input type="number" name="PaidAmount" placeholder="Paid Amount ..." />
+            <input type="number" name="PremiseId" placeholder="Premise ID ..." />
             <input type="submit" name="signup_submit" value="Capture Payment" /> <br>
         </form>
         <button style="color: black; margin-bottom: 1%;">Sort by premise</button>

@@ -11,10 +11,10 @@
     <div id="login-box">
         <div class="left">
           <h1>Add Premise</h1>
-          <form action="" method="post">
-            <input type="text" name="clientid" placeholder="Client ID ..." />
-            <input type="text" name="route" placeholder="Premise route ..."/>
-            <input type="text" name="meter" placeholder="Premise Meter No ..."/>
+          <form action="http://localhost:5000/premises" method="post">
+            <input type="number" name="MeterNo" placeholder="Meter ..." />
+            <input type="number" name="Customerid" placeholder="Customerid ..."/>
+            <input type="number" name="RID" placeholder="RID ..."/>
             <input type="submit" value="Add Premise" style="margin: 0;">
             <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a>
           </form>
