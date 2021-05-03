@@ -41,25 +41,17 @@
             <input type="submit" name="signup_submit" value="Capture Payment" /> <br>
         </form>
         <button style="color: black; margin-bottom: 1%;">Sort by premise</button>
-        <table>
-            <tr>
-                <th>Bill ID</th>
-                <th>Client ID</th>
-                <th>Premise ID</th>
-                <th>Date Paid</th>
-                <th>Amount</th>
-                <th>Amount Paid</th>
-                <th>Payment Status</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+        <table id="allpa">
+            <thead>
+                <tr>
+                    <th>TransactionID</th>
+                    <th>billid</th>
+                    <th>ExpectedAmount</th>
+                    <th>PaidAmount</th>
+                    <th>PremiseId</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" style="color: white;"></tbody>
         </table>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

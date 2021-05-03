@@ -39,19 +39,16 @@
             <input type="number" name="Reading" placeholder="Reading ..." />
             <input type="submit" name="signup_submit" value="Send Bill" /> <br>
         </form>
-        <table>
-            <tr>
-                <th>Bill ID</th>
-                <th>Premise ID</th>
-                <th>Biller ID</th>
-                <th>Reading</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+        <table id="allbi">
+            <thead>
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Premise ID</th>
+                    <th>Biller ID</th>
+                    <th>Reading</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" style="color: white;"></tbody>
         </table>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
