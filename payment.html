@@ -33,13 +33,6 @@
     </nav>
 
     <div class="allbills">
-        <form action="http://localhost:5000/payments" method="post" style="margin-bottom: 20px;">
-            <input type="number" name="BID" placeholder="Bill ID ..." />
-            <input type="number" name="ExpectedAmount" placeholder="Expected Payment ..." />
-            <input type="number" name="PaidAmount" placeholder="Paid Amount ..." />
-            <input type="number" name="PremiseId" placeholder="Premise ID ..." />
-            <input type="submit" name="signup_submit" value="Capture Payment" /> <br>
-        </form>
         <button style="color: black; margin-bottom: 1%;">Sort by premise</button>
         <table id="allpa">
             <thead>
@@ -51,7 +44,7 @@
                     <th>PremiseId</th>
                 </tr>
             </thead>
-            <tbody class="tbody" style="color: white;"></tbody>
+            <tbody class="tbody"></tbody>
         </table>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

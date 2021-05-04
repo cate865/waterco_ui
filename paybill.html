@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Paying Your Bill</title>
+</head>
+<body>
+    <h2>Bill Payment</h2>
+    <form action="http://localhost:5000/payments" method="post" style="margin-bottom: 20px;">
+        <input type="number" name="billid" placeholder="Bill ID ..." /> <br>
+        <input type="number" name="PaidAmount" placeholder="Amount to pay..." /> <br>
+        <!-- <input type="number" name="PremiseId" placeholder="Premise ID ..." /> <br> -->
+        <input type="submit" name="signup_submit" value="Pay Bill" /> <br> <br>
+    </form>
+    <script src="./index.js"></script>
+</body>
+</html>

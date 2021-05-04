@@ -2,7 +2,7 @@
 // get all premises
 $(document).ready(() => {
 $.ajax({
-    url: "http://localhost:5000/premises", 
+    url: "http://localhost:5000/premises",
     method: 'GET',
     dataType : 'json',
     success: function(data){
@@ -31,7 +31,7 @@ $.ajax({
 // get all clients/customers/members
 $(document).ready(() => {
 $.ajax({
-    url: "http://localhost:5000/members", 
+    url: "http://localhost:5000/members",
     method: 'GET',
     dataType : 'json',
     success: function(data){
@@ -96,10 +96,12 @@ $.ajax({
             var PremiseId = '';
             var UserID = '';
             var Reading = '';
+            var Amount = '';
             cols += '<td> '+ data.data[index].billid +'</td>';
             cols += '<td> '+ data.data[index].PremiseId +'</td>';
             cols += '<td> '+ data.data[index].UserID+'</td>';
             cols += '<td> '+ data.data[index].Reading+'</td>';
+            cols += '<td> '+ data.data[index].Amount+'</td>';
             newRow.append(cols);
             $("#allbi .tbody").append(newRow);
           }
