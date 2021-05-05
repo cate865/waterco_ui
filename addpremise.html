@@ -11,14 +11,16 @@
     <div id="login-box">
         <div class="left">
           <h1>Add Premise</h1>
-          <form action="http://localhost:5000/premises" method="post">
-            <input type="number" name="MeterNo" placeholder="Meter ..." />
-            <input type="number" name="Customerid" placeholder="Customerid ..."/>
-            <input type="number" name="RID" placeholder="RID ..."/>
+          <form onsubmit="event.preventDefault(); onPremiseDetailsSubmit();">
+            <input type="number" name="MeterNo" placeholder="Meter ..." id="MeterNo" />
+            <input type="number" name="Customerid" placeholder="Customerid ..." id="Customerid"/>
+            <input type="number" name="RID" placeholder="RID ..." id="RID"/>
             <input type="submit" value="Add Premise" style="margin: 0;">
             <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a>
           </form>
         </div>
       </div>
+      
 </body>
+
 </html>
