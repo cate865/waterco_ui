@@ -34,26 +34,31 @@
 
     <div class="allbills">
         <form action="http://localhost:5000/bills" method="post" style="margin-bottom: 20px;">
-            <input type="number" name="PremiseId" placeholder="Premise ID ..." />
-            <input type="number" name="UserID" placeholder="Biller ID ..." />
+            <label for="PremiseID"  style="margin-right: 20px; margin-bottom: 0px;">Select Premise</label>
+            <label for="UserID" style="margin-bottom: 0px; margin-right: 80%;">Select Biller</label>
+            <select name="PremiseID" id="PremiseID" style="margin-right: 57px; margin-top: 0px;">
+              </select>
+            <select name="UserID" id="UserID" style="margin-top: 0px;">
+              </select>
             <input type="number" name="Reading" placeholder="Reading ..." />
             <input type="submit" name="signup_submit" value="Send Bill" /> <br>
         </form>
-        <table>
-            <tr>
-                <th>Bill ID</th>
-                <th>Premise ID</th>
-                <th>Biller ID</th>
-                <th>Reading</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+        <table id="allbi">
+            <thead>
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Premise ID</th>
+                    <th>Biller ID</th>
+                    <th>Reading(Units)</th>
+                    <th>Amount(Rwf)</th>
+                    <th>Fully Paid</th>
+                    <th>Creation Date</th>
+                </tr>
+            </thead>
+            <tbody class="tbody"></tbody>
         </table>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="./index.js"></script>
