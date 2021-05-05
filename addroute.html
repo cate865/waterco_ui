@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./newbiller.css">
-    <title>Add Route</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./newbiller.css">
+  <title>Add Route</title>
 </head>
+
 <body>
-    <div id="login-box">
-        <div class="left">
-          <h1>Add Route</h1>
-          <form action="http://localhost:5000/routes" method="post">
-            <input type="text" name="Route_name" placeholder="Name ..."/>
-            <input type="submit" value="Add Route" style="margin: 0;">
-            <a href="./routes.html" style="text-decoration: none; color: white; background-color: #16a085;">All Routes</a>
-          </form>
-        </div>
-      </div>
+  <div id="login-box">
+    <div class="left">
+      <h1>Add Route</h1>
+      <form onsubmit="event.preventDefault(); onFormSubmit();">
+        <input type="text" name="Route_name" placeholder="Name ..." id="Route_name" />
+        <input type="text" name="Status" placeholder="Name ..." id="Status" />
+        <input type="submit" value="Add Route" style="margin: 0;">
+        <a href="./routes.html" style="text-decoration: none; color: white; background-color: #16a085;">All Routes</a>
+      </form>
+    </div>
+  </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./index.js"></script>
+  
 </body>
+
 </html>
