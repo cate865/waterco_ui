@@ -44,9 +44,11 @@ function userLogin(data) {
         success: function (response) {
             var data = response.user;
             console.log(data);
-            console.log(response.token);
+
+            console.log("token:" + response.token);
+    
             document.cookie =  'authToken=' + response.token
-            
+            window.location.href = "./index.html";
         },
         headers:{
             Accept:"application/json; charset=utf-8",
@@ -98,7 +100,7 @@ function addUser(data) {
             var data = response.data;
             console.log(data);
             addUserRecordToTable(data);
-            
+            window.location.href = "./loginbiller.html";
             
         },
         headers:{
@@ -112,6 +114,8 @@ function addUser(data) {
 }
 
 function onUserDetailsSubmit() {
+  console.log("Function called : add user");
+  document.getElementById("loginbox").style.display = "none";
     var formData = {};
     formData["Email"] = document.getElementById("Email").value;
     formData["UserName"] = document.getElementById("UserName").value;
@@ -122,11 +126,25 @@ function onUserDetailsSubmit() {
     } else {
         updateUserRecord(formData);
     }
+    // alert("User Edited Successfully");
     clearUserForm();
+
+}
+
+function onUserDetailsSubmitTwo() {
+    var formData = {};
+    formData["Email"] = document.getElementById("Email").value;
+    formData["UserName"] = document.getElementById("UserName").value;
+    formData["Password"] = document.getElementById("Password").value;
+    addUser(formData);
+    window.location.href = "./index.html";
+    clearUserForm();
+
 }
 
 // Get all users
 $(document).ready(function () {
+    document.getElementById("loginbox").style.display = "none";
     $.ajax({
         type: "GET",
         url: baseUrl + "/users/",
@@ -173,6 +191,7 @@ function viewOneUser(id) {
 
 // Updating a user
 function onUserEdit(td) {
+    document.getElementById("loginbox").style.display = "block";
     selectedRecord = td.parentElement.parentElement;
     selectedRecordID = selectedRecord.cells[0].innerHTML;
     document.getElementById("Email").value = selectedRecord.cells[1].innerHTML;
@@ -257,10 +276,28 @@ function addMemberRecordToTable(data) {
     var cell4 = newRecord.insertCell(3);
     cell4.innerHTML = data.Email;
     var cell5 = newRecord.insertCell(4);
-    cell5.innerHTML = '<a onclick="onMemberEdit(this)">Edit</a> <a onClick="onMemberDelete(this)">Delete</a>';   
+    cell5.innerHTML = '<a onclick="showOne(this)">View</a> <a onclick="onMemberEdit(this)">Edit</a> <a onClick="onMemberDelete(this)">Delete</a>';   
+}
+
+function showOne(recordid){
+    // take in ID
+    // get /record/id from api    // create divs to show details
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/members/" + recordid,
+        cache: false,
+        success: function (response) {
+            console.log(response.data[0].Customerid);
+            console.log(response.data[0].CustName);
+            console.log(response.data[0].TelephoneNo);
+            console.log(response.data[0].Email);
+            window.location.href = "./clientview.html";
+        }
+    });
 }
  
 function onMemberFormSubmit() {
+  console.log("Add member called");
     var formData = {};
     formData["CustName"] = document.getElementById("CustName").value;
     formData["TelephoneNo"] = document.getElementById("TelephoneNo").value;
@@ -269,10 +306,79 @@ function onMemberFormSubmit() {
 
     if (selectedRecord == null) {
         saveMemberFormData(formData);
+        alert("Client Added Successfully");
     } else {
         updateMemberFormRecord(formData);
+        alert("Client Edited Successfully");
     }
     clearMemberForm();
+}
+
+function onBillFormSubmit() {
+    var formData = {};
+    formData["PremiseId"] = document.getElementById("PremiseId").value;
+    formData["UserID"] = document.getElementById("UserID").value;
+    formData["Reading"] = document.getElementById("Reading").value;
+
+    saveBillFormData(formData);
+
+    clearBillForm();
+}
+
+function onPayFormSubmit() {
+    var formData = {};
+    formData["billid"] = document.getElementById("billid").value;
+    formData["PaidAmount"] = document.getElementById("PaidAmount").value;
+
+    savePayFormData(formData);
+
+    clearPayForm();
+}
+
+// Adding a member
+function saveBillFormData(data) {
+    var postData = JSON.stringify(data);
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/bills/",
+        dataType: 'json',
+        data: postData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function (response) {
+            alert("Bill generated and client notified");
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+}
+
+// Adding a member
+function savePayFormData(data) {
+    var postData = JSON.stringify(data);
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/payments/",
+        dataType: 'json',
+        data: postData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function (response) {
+            console.log("Paid");
+            alert("Payment Successful. Thank You");
+            close();
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
 }
 
 // Adding a member
@@ -286,9 +392,9 @@ function saveMemberFormData(data) {
         contentType: "application/json; charset=utf-8",
         cache: false,
         success: function (response) {
+            console.log(response.token);
             addMemberRecordToTable(response.data);
            
-            
         },
         headers:{
             Accept:"application/json; charset=utf-8",
@@ -421,6 +527,17 @@ function clearMemberForm() {
     
 }
 
+function clearBillForm() {
+    document.getElementById("PremiseId").value = "";
+    document.getElementById("UserID").value = "";
+    document.getElementById("Reading").value = "";
+}
+
+function clearPayForm() {
+    document.getElementById("billid").value = "";
+    document.getElementById("PaidAmount").value = "";
+}
+
 //----------------------------------End of Members Router------------------------------
 
 //----------------------------------Beginning of Premises Router----------------------- 
@@ -454,8 +571,10 @@ function onPremiseFormSubmit() {
 
     if (selectedRecord == null) {
         savePremiseFormData(formData);
+        alert("Premise Added Successfully");
     } else {
         updatePremiseFormRecord(formData);
+        alert("Premise Edited Successfully");
     }
     clearPremiseForm();
 }
@@ -659,13 +778,13 @@ function addRouteRecordToTable(data) {
 function onRouteFormSubmit() {
     var formData = {};
     formData["Route_name"] = document.getElementById("Route_name").value;
-    formData["Status"] = document.getElementById("Status").value;
-    
 
     if (selectedRecord == null) {
         saveRouteFormData(formData);
+        alert("Route Added Successfully");
     } else {
         updateRouteFormRecord(formData);
+        alert("Route Edited Successfully");
     }
     clearRouteForm();
 }
@@ -892,7 +1011,7 @@ $.ajax({
       if(data.data.length > 0){
         console.log("Fetched premises IDs");
           for(let index = 0; index < data.data.length; index++) {
-            $('#PremiseID').append('<option value="' + data.data[index].PremiseId + '">' + data.data[index].PremiseId + '</option>');
+            $('#PremiseID').append('<option name="PremiseId" value="' + data.data[index].PremiseId + '">' + data.data[index].PremiseId + '</option>');
           }
     }
   }
