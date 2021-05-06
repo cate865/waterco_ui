@@ -1,98 +1,83 @@
 body {
-    background-color: #fff;
+    background-color: #181818;
     color: black;
     margin-left: 5%;
     margin-right: 5%;
 }
 
-.billers > .vone > .h4{
-    float: left;
-    padding-left: 7%;
-    margin-bottom: 5px;
-}
-
-.viewbiller {
-    display: grid;
-    place-items: center;
-}
-
-.viewbiller > .bdetails > .readdetails {
-    margin-left: 40%;
-}
-
-.viewbiller > .bdetails > form > input{
-    margin-top: 10%;
-    color: black;
-}
-
-.viewbiller > .bdetails > form > input[type="submit"]{
-    background-color: #fff;
-    color: black;
-    padding: 2%;
-    margin-left: 20%
-}
-
 table {
-    background-color: #fff;
-    width: 90%;
+    background-color: grey;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 20px;
 }
 
-table > tr {
-    text-align: left;
+thead {
+    background-color: lightgrey;
 }
 
-table > tr > th {
-    background-color: #fff;
-    color: black;
+th {
+    height: 30px;
+    border: 1px solid black;
+    padding: 5px;
 }
 
-table > tr > td {
-    color: black;
+td {
+    height: 30px;
+    border: 1px solid black;
+    padding: 5px;
 }
 
-.viewclient {
-    display: grid;
-    place-items: center;
+tr:nth-child(even) {
+    background-color: rgb(129, 118, 118);
 }
 
-.viewclient > .cdetails > .readdetails {
-    margin-left: 40%;
+tr {}
+
+tr:hover {
+    background-color: darkgrey;
 }
 
-.viewclient > .cdetails > form > input{
-    margin-top: 10%;
-    color: black;
-}
-
-.viewclient > .cdetails > form > input[type="submit"]{
-    background-color: #fff;
-    color: black;
-    padding: 2%;
-    margin-left: 20%
-}
-
-select{
-	font-size:18px;
-}
+tbody {}
 
 form {
-    color: black;
-}
-
-.dashboard {
-    position: relative;
-}
-
-.droutes, .dbills, .dpremises {
-    float: left;
-    margin-right: 4%;
-    margin-top: 11%;
-    background-color: #fff;
-    color: black;
-    padding: 5px;
-    border-radius: 20px;
+    background-color: dimgrey;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 25px;
 }
 
 input {
-    margin-top: 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 32px;
+}
+
+label {}
+
+select {
+    width: 70px;
+}
+
+input [type="submit"] {
+    /* background-color: black; */
+    color: #fff;
+    background: #16a085;
+}
+
+a {
+    cursor: pointer;
+    color: black;
+    padding: 5px;
+}
+
+button {
+    border-radius: 25px;
+    padding: 5px;
+    margin: 5px;
+    background: #16a085;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
 }

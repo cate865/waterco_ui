@@ -34,14 +34,16 @@
 
     <div class="allbills">
         <form action="http://localhost:5000/bills" method="post" style="margin-bottom: 20px;">
-            <label for="PremiseID"  style="margin-right: 20px; margin-bottom: 0px;">Select Premise</label>
-            <label for="UserID" style="margin-bottom: 0px; margin-right: 80%;">Select Biller</label>
-            <select name="PremiseID" id="PremiseID" style="margin-right: 57px; margin-top: 0px;">
+            <!-- <label for="PremiseID"  style="margin-right: 20px; margin-bottom: 0px;">Select Premise</label> -->
+            <!-- <label for="UserID" style="margin-bottom: 0px; margin-right: 80%;">Select Biller</label> -->
+            <!-- <select name="PremiseID" id="PremiseID" style="margin-right: 57px; margin-top: 0px;">
               </select>
             <select name="UserID" id="UserID" style="margin-top: 0px;">
-              </select>
+              </select> -->
+            <input type="number" name="PremiseId" placeholder="Premise ID">
+            <input type="number" name="UserID" placeholder="Biller ID">
             <input type="number" name="Reading" placeholder="Reading ..." />
-            <input type="submit" name="signup_submit" value="Send Bill" /> <br>
+            <input type="submit" name="signup_submit" value="Send Bill" style="background-color: #16a085; color: #fff; padding: 8px; border-radius: 10px; font-weight: bold;" /> <br>
         </form>
         <table id="allbi">
             <thead>

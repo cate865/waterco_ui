@@ -8,12 +8,11 @@
     <title>Paying Your Bill</title>
 </head>
 <body>
-    <h2>Bill Payment</h2>
-    <form action="http://localhost:5000/payments" method="post" style="margin-bottom: 20px;">
+    <form action="http://localhost:5000/payments" method="post" style="margin-bottom: 20px; width: 30%; margin-left: 30%; margin-top: 10%;">
+        <h2>Bill Payment</h2>
         <input type="number" name="billid" placeholder="Bill ID ..." /> <br>
         <input type="number" name="PaidAmount" placeholder="Amount to pay..." /> <br>
-        <!-- <input type="number" name="PremiseId" placeholder="Premise ID ..." /> <br> -->
-        <input type="submit" name="signup_submit" value="Pay Bill" /> <br> <br>
+        <input type="submit" name="signup_submit" value="Pay Bill" style="background-color: #16a085; color: #fff; padding: 8px; border-radius: 10px; font-weight: bold;" /> <br> <br>
     </form>
     <script src="./index.js"></script>
 </body>
