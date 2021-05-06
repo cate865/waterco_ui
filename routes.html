@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./index.css">
     <title>Routes</title>
 </head>
+
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -30,11 +32,23 @@
         </div>
     </nav>
 
+    <div id="login-box">
+        <div class="left">
+            <h1>Add Route</h1>
+            <form onsubmit="event.preventDefault(); onRouteFormSubmit();">
+                <input type="text" name="Route_name" placeholder="Name ..." id="Route_name" />
+                <input type="text" name="Status" placeholder="Name ..." id="Status" />
+                <input type="submit" value="Add Route" style="margin: 0;">
+            </form>
+        </div>
+    </div>
+
     <div class="allroutes">
-        <a href="./addroute.html" style="background-color: #16a085; color: #fff; padding: 8px; border-radius: 10px; font-weight: bold;">Add a Route</a>
+        <!-- <a href="./addroute.html" style="text-decoration: none; color: white; background-color: #16a085;">Add a -->
+            <!-- Route</a> -->
         <h2>All Routes</h2>
 
-        <table id="routeslist">
+        <table id="Routeslist">
 
             <thead>
                 <tr>
@@ -48,11 +62,11 @@
             </tbody>
         </table>
     </div>
-    
-    
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./index.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="./index.js"></script>
 </body>
+
 </html>
