@@ -112,6 +112,7 @@ function addUser(data) {
 }
 
 function onUserDetailsSubmit() {
+  console.log("Function called : add user");
     var formData = {};
     formData["Email"] = document.getElementById("Email").value;
     formData["UserName"] = document.getElementById("UserName").value;
@@ -233,6 +234,7 @@ function addMemberRecordToTable(data) {
 }
  
 function onMemberFormSubmit() {
+  console.log("Add member called");
     var formData = {};
     formData["CustName"] = document.getElementById("CustName").value;
     formData["TelephoneNo"] = document.getElementById("TelephoneNo").value;
@@ -245,6 +247,7 @@ function onMemberFormSubmit() {
         updateMemberFormRecord(formData);
     }
     clearMemberForm();
+    console.log("Done");
 }
 
 // Adding a member
@@ -824,7 +827,7 @@ $.ajax({
       if(data.data.length > 0){
         console.log("Fetched premises IDs");
           for(let index = 0; index < data.data.length; index++) {
-            $('#PremiseID').append('<option value="' + data.data[index].PremiseId + '">' + data.data[index].PremiseId + '</option>');
+            $('#PremiseID').append('<option name="PremiseId" value="' + data.data[index].PremiseId + '">' + data.data[index].PremiseId + '</option>');
           }
     }
   }
