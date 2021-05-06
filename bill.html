@@ -39,6 +39,11 @@
             <input type="number" name="Reading" id="Reading" placeholder=" Reading ..." />
             <input type="submit" name="signup_submit" value="Send Bill"/> <br>
         </form>
+        <form >
+            <input type="number" name="Billid" placeholder="Bill id..." id="Billid" />
+            <input type="submit" onclick="event.preventDefault(); onBillIdInput();" value="View One" style="margin: 0;"/>
+            <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
+        </form>
         <table id="allbi">
             <thead>
                 <tr>
