@@ -60,7 +60,6 @@ select {
 }
 
 input [type="submit"] {
-    /* background-color: black; */
     color: #fff;
     background: #16a085;
 }
@@ -82,3 +81,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
+#loginbox {
+    display: hidden;
+}
