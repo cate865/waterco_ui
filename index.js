@@ -30,7 +30,8 @@ function getCookie(name) {
 
 
 //-----------------------------------------------Beginning of user Router-----------------------------------
-// Logging in a user
+
+// User Login
 function userLogin(data) {
     var postData = JSON.stringify(data);
     $.ajax({
@@ -45,7 +46,6 @@ function userLogin(data) {
             console.log(data);
             console.log(response.token);
             document.cookie =  'authToken=' + response.token
-            //$.cookie('token',response.data.token)
             
         },
         headers:{
@@ -64,18 +64,27 @@ function onLoginDetailsSubmit() {
     formData["Password"] = document.getElementById("Password").value;
     
     userLogin(formData);
-    
-
-    // if (selectedRecord == null) {
-    //     saveFormData(formData);
-    // } else {
-    //     updateFormRecord(formData);
-    // }
-    // clearForm();
 }
 
+// User sign-Up (Create User)
+function addUserRecordToTable(data) {
+    var allus = document.getElementById("allus").getElementsByTagName("tbody")[0];
+    var newRecord =allus.insertRow(allus.length);
 
-// Add user
+    var cell1 = newRecord.insertCell(0);
+    cell1.innerHTML = data.UserID;
+    var cell2 = newRecord.insertCell(1);
+    cell2.innerHTML = data.UserName;
+    var cell3 = newRecord.insertCell(2);
+    cell3.innerHTML = data.Email;
+    var cell4 = newRecord.insertCell(3);
+    cell4.innerHTML = data.createdAt;
+    var cell5 = newRecord.insertCell(4);
+    cell5.innerHTML = data.updatedAt;
+    var cell6 = newRecord.insertCell(5);
+    cell6.innerHTML = '<a onclick="onUserEdit(this)">Edit</a> <a onClick="onUserDelete(this)">Delete</a>';   
+}
+
 function addUser(data) {
     var postData = JSON.stringify(data);
     $.ajax({
@@ -86,11 +95,10 @@ function addUser(data) {
         contentType: "application/json; charset=utf-8",
         cache: false,
         success: function (response) {
-            var data = response.user;
+            var data = response.data;
             console.log(data);
-            console.log(response.token);
+            addUserRecordToTable(data);
             
-            //$.cookie('token',response.data.token)
             
         },
         headers:{
@@ -109,16 +117,102 @@ function onUserDetailsSubmit() {
     formData["UserName"] = document.getElementById("UserName").value;
     formData["Password"] = document.getElementById("Password").value;
     
-    addUser(formData);
-    
-
-    // if (selectedRecord == null) {
-    //     saveFormData(formData);
-    // } else {
-    //     updateFormRecord(formData);
-    // }
-    // clearForm();
+    if (selectedRecord == null) {
+        addUser(formData);
+    } else {
+        updateUserRecord(formData);
+    }
+    clearUserForm();
 }
+
+// Get all users
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/users/",
+        cache: false,
+        success: function (response) {
+            var data = response.data;
+            data.forEach((user) => {
+                addUserRecordToTable(user);
+            });
+        },
+        headers:{
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+});
+
+// Updating a user
+function onUserEdit(td) {
+    selectedRecord = td.parentElement.parentElement;
+    selectedRecordID = selectedRecord.cells[0].innerHTML;
+    document.getElementById("Email").value = selectedRecord.cells[1].innerHTML;
+    document.getElementById("UserName").value = selectedRecord.cells[2].innerHTML;
+   
+}
+
+function updateUserTableRecord(data) {
+    selectedRecord.cells[0].innerHTML = selectedRecordID;
+    selectedRecord.cells[1].innerHTML = data.Email;
+    selectedRecord.cells[2].innerHTML = data.UserName;
+    }
+
+
+function updateUserRecord(data) {
+    var updateData = JSON.stringify(data);
+    $.ajax({
+        type: 'PUT',
+        url: baseUrl + "/users/" + selectedRecordID,
+        dataType: 'json',
+        data: updateData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function () {
+            updateUserTableRecord(data);
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+function onUserDelete(td) {
+    if (confirm('Are you sure you want to delete this record')) {
+        var row = td.parentElement.parentElement;
+        deleteUserData(row);
+        
+        
+    }
+
+}
+
+function deleteUserData(row){
+    $.ajax({
+        type: "DELETE",
+        url: baseUrl + "/users/" + row.cells[0].innerHTML,
+        cache: false,
+        success: function (response) {
+            console.log(response.message);
+            console.log(selectedRecordID);
+        },
+        headers:{
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+function clearUserForm() {
+    document.getElementById("Email").value = "";
+    document.getElementById("UserName").value = "";
+    
+}
+
 //--------------------------------------End of users router ---------------------------------------------------------
 //--------------------------------------Beginning of members router--------------------------------------------------
 // Add member
@@ -133,13 +227,16 @@ function addMemberRecordToTable(data) {
     var cell3 = newRecord.insertCell(2);
     cell3.innerHTML = data.TelephoneNo;
     var cell4 = newRecord.insertCell(3);
-    cell4.innerHTML = '<a onclick="onMemberEdit(this)">Edit</a> <a onClick="onMemberDelete(this)">Delete</a> <a href="index.php?page=memberdash&id="` + data.member_id + `>View</a>';   
+    cell4.innerHTML = data.Email;
+    var cell5 = newRecord.insertCell(4);
+    cell5.innerHTML = '<a onclick="onMemberEdit(this)">Edit</a> <a onClick="onMemberDelete(this)">Delete</a>';   
 }
  
 function onMemberFormSubmit() {
     var formData = {};
     formData["CustName"] = document.getElementById("CustName").value;
     formData["TelephoneNo"] = document.getElementById("TelephoneNo").value;
+    formData["Email"] = document.getElementById("Email").value;
     
 
     if (selectedRecord == null) {
@@ -150,7 +247,7 @@ function onMemberFormSubmit() {
     clearMemberForm();
 }
 
-// Adding a route
+// Adding a member
 function saveMemberFormData(data) {
     var postData = JSON.stringify(data);
     $.ajax({
@@ -177,7 +274,7 @@ function saveMemberFormData(data) {
 }
 
 
-// Getting all routes
+// Getting all members
 $(document).ready(function () {
     $.ajax({
         type: "GET",
@@ -188,17 +285,21 @@ $(document).ready(function () {
             data.forEach((member) => {
                 addMemberRecordToTable(member);
             });
+        },
+        headers:{
+            Authorization: `token ${getCookie('authToken')}`
         }
     });
 });
 
 
-//Updating a route
+//Updating a member
 function onMemberEdit(td) {
     selectedRecord = td.parentElement.parentElement;
     selectedRecordID = selectedRecord.cells[0].innerHTML;
     document.getElementById("CustName").value = selectedRecord.cells[1].innerHTML;
     document.getElementById("TelephoneNo").value = selectedRecord.cells[2].innerHTML;
+    document.getElementById("Email").value = selectedRecord.cells[3].innerHTML;
    
 }
 
@@ -206,6 +307,7 @@ function updateMemberTableRecord(data) {
     selectedRecord.cells[0].innerHTML = selectedRecordID;
     selectedRecord.cells[1].innerHTML = data.CustName;
     selectedRecord.cells[2].innerHTML = data.TelephoneNo;
+    selectedRecord.cells[3].innerHTML = data.Email;
     }
 
 
@@ -220,17 +322,23 @@ function updateMemberFormRecord(data) {
         cache: false,
         success: function () {
             updateMemberTableRecord(data);
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
         }
     });
 
 }
 
+// Deleting a member
 function onMemberDelete(td) {
     if (confirm('Are you sure you want to delete this record')) {
         var row = td.parentElement.parentElement;
         deleteMemberData(row);
-        //document.getElementById("memberslist").deleteRow(row.rowIndex);
-        
+        document.getElementById("memberslist").deleteRow(row.rowIndex);
     }
 
 }
@@ -243,6 +351,9 @@ function deleteMemberData(row){
         success: function (response) {
             console.log(response.message);
             console.log(selectedRecordID);
+        },
+        headers:{
+            Authorization: `token ${getCookie('authToken')}`
         }
     });
 
@@ -251,102 +362,356 @@ function deleteMemberData(row){
 function clearMemberForm() {
     document.getElementById("CustName").value = "";
     document.getElementById("TelephoneNo").value = "";
+    document.getElementById("Email").value = "";
     
 }
 
 //----------------------------------End of Members Router------------------------------
+
+//----------------------------------Beginning of Premises Router----------------------- 
+// Add Premise
+function addPremiseRecordToTable(data) {
+    var Premiseslist = document.getElementById("Premiseslist").getElementsByTagName("tbody")[0];
+    var newRecord =Premiseslist.insertRow(Premiseslist.length);
+
+    var cell1 = newRecord.insertCell(0);
+    cell1.innerHTML = data.PremiseId;
+    var cell2 = newRecord.insertCell(1);
+    cell2.innerHTML = data.MeterNo;
+    var cell3 = newRecord.insertCell(2);
+    cell3.innerHTML = data.Customerid;
+    var cell4 = newRecord.insertCell(3);
+    cell4.innerHTML = data.Routeid;
+    var cell5 = newRecord.insertCell(4);
+    cell5.innerHTML = data.createdAt;
+    var cell6 = newRecord.insertCell(5);
+    cell6.innerHTML = data.updatedAt;
+    var cell7 = newRecord.insertCell(6);
+    cell7.innerHTML = '<a onclick="onPremiseEdit(this)">Edit</a>';   
+}
+ 
+function onPremiseFormSubmit() {
+    var formData = {};
+    formData["MeterNo"] = document.getElementById("MeterNo").value;
+    formData["Customerid"] = document.getElementById("Customerid").value;
+    formData["Routeid"] = document.getElementById("Routeid").value;
+    
+
+    if (selectedRecord == null) {
+        savePremiseFormData(formData);
+    } else {
+        updatePremiseFormRecord(formData);
+    }
+    clearPremiseForm();
+}
+
+// Adding a Premise
+function savePremiseFormData(data) {
+    var postData = JSON.stringify(data);
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/premises/",
+        dataType: 'json',
+        data: postData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function (response) {
+            addPremiseRecordToTable(response.data);
+           
+            
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+       
+        
+    });
+}
+
+
+// Getting all Premises
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/premises/",
+        cache: false,
+        success: function (response) {
+            var data = response.data;
+            data.forEach((Premise) => {
+                addPremiseRecordToTable(Premise);
+            });
+        },
+        headers:{
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+});
+
+
+//Updating a Premise
+function onPremiseEdit(td) {
+    selectedRecord = td.parentElement.parentElement;
+    selectedRecordID = selectedRecord.cells[0].innerHTML;
+    document.getElementById("MeterNo").value = selectedRecord.cells[1].innerHTML;
+    document.getElementById("Customerid").value = selectedRecord.cells[2].innerHTML;
+    document.getElementById("Routeid").value = selectedRecord.cells[3].innerHTML;
    
+}
 
-// get all premises
-$(document).ready(() => {
-$.ajax({
-    url: "http://localhost:5000/premises",
-    method: 'GET',
-    dataType : 'json',
-    success: function(data){
-      if(data.data.length > 0){
-        console.log("Fetched premises");
-          for(let index = 0; index < data.data.length; index++) {
-            var newRow = $("<tr>");
-            var cols = "";
-            var PremiseId = '';
-            var MeterNo = '';
-            var Customerid = '';
-            var Routeid = '';
-            var createdAt = '';
-            var updatedAt = '';
-            cols += '<td> '+ data.data[index].PremiseId +'</td>';
-            cols += '<td> '+ data.data[index].MeterNo +'</td>';
-            cols += '<td> '+ data.data[index].Customerid+'</td>';
-            cols += '<td> '+ data.data[index].Routeid+'</td>';
-            cols += '<td> '+ data.data[index].createdAt+'</td>';
-            cols += '<td> '+ data.data[index].updatedAt+'</td>';
-            newRow.append(cols);
-            $("#allpr .tbody").append(newRow);
-          }
+function updatePremiseTableRecord(data) {
+    selectedRecord.cells[0].innerHTML = selectedRecordID;
+    selectedRecord.cells[1].innerHTML = data.MeterNo;
+    selectedRecord.cells[2].innerHTML = data.Customerid;
+    selectedRecord.cells[3].innerHTML = data.Routeid;
     }
-  }
-})
-})
 
 
-// get all clients/customers/members
-$(document).ready(() => {
-$.ajax({
-    url: "http://localhost:5000/members",
-    method: 'GET',
-    dataType : 'json',
-    success: function(data){
-      if(data.data.length > 0){
-        console.log("Fetched Clients");
-          for(let index = 0; index < data.data.length; index++) {
-            var newRow = $("<tr>");
-            var cols = "";
-            var Customerid = '';
-            var CustName = '';
-            var TelephoneNo = '';
-            var Email = '';
-            var createdAt = '';
-            var updatedAt = '';
-            cols += '<td> '+ data.data[index].Customerid +'</td>';
-            cols += '<td> '+ data.data[index].CustName +'</td>';
-            cols += '<td> '+ data.data[index].TelephoneNo+'</td>';
-            cols += '<td> '+ data.data[index].Email+'</td>';
-            cols += '<td> '+ data.data[index].createdAt+'</td>';
-            cols += '<td> '+ data.data[index].updatedAt+'</td>';
-            newRow.append(cols);
-            $("#allcl .tbody").append(newRow);
-          }
+function updatePremiseFormRecord(data) {
+    var updateData = JSON.stringify(data);
+    $.ajax({
+        type: 'PUT',
+        url: baseUrl + "/premises/" + selectedRecordID,
+        dataType: 'json',
+        data: updateData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function () {
+            updatePremiseTableRecord(data);
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+function clearPremiseForm() {
+    document.getElementById("MeterNo").value = "";
+    document.getElementById("Customerid").value = "";
+    document.getElementById("Routeid").value = "";
+    
+}
+
+//----------------------------------End of Premises Router-----------------------------
+
+//---------------------------------Beginning of Routes Router---------------------------
+// Add Route
+function addRouteRecordToTable(data) {
+    var Routeslist = document.getElementById("Routeslist").getElementsByTagName("tbody")[0];
+    var newRecord =Routeslist.insertRow(Routeslist.length);
+
+    var cell1 = newRecord.insertCell(0);
+    cell1.innerHTML = data.Routeid;
+    var cell2 = newRecord.insertCell(1);
+    cell2.innerHTML = data.Route_name;
+    var cell3 = newRecord.insertCell(2);
+    cell3.innerHTML = data.Status;
+    var cell4 = newRecord.insertCell(3);
+    cell4.innerHTML = '<a onclick="onRouteEdit(this)">Edit</a>';   
+}
+ 
+function onRouteFormSubmit() {
+    var formData = {};
+    formData["Route_name"] = document.getElementById("Route_name").value;
+    formData["Status"] = document.getElementById("Status").value;
+    
+
+    if (selectedRecord == null) {
+        saveRouteFormData(formData);
+    } else {
+        updateRouteFormRecord(formData);
     }
-  }
-})
-})
+    clearRouteForm();
+}
 
-// get all routes
-$(document).ready(() => {
-$.ajax({
-    url: "http://localhost:5000/routes", 
-    method: 'GET',
-    dataType : 'json',
-    success: function(data){
-      if(data.data.length > 0){
-        console.log("Fetched routes");
-          for(let index = 0; index < data.data.length; index++) {
-            var newRow = $("<tr>");
-            var cols = "";
-            var Routeid = '';
-            var Route_name = '';
-            var Status = '';
-            cols += '<td> '+ data.data[index].Routeid +'</td>';
-            cols += '<td> '+ data.data[index].Route_name +'</td>';
-            cols += '<td> '+ data.data[index].Status+'</td>';
-            newRow.append(cols);
-            $("#allro .tbody").append(newRow);
-          }
+// Adding a Route
+function saveRouteFormData(data) {
+    var postData = JSON.stringify(data);
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "/routes/",
+        dataType: 'json',
+        data: postData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function (response) {
+            addRouteRecordToTable(response.data);
+           
+            
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+       
+        
+    });
+}
+
+
+// Getting all Routes
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/routes/",
+        cache: false,
+        success: function (response) {
+            var data = response.data;
+            data.forEach((Route) => {
+                addRouteRecordToTable(Route);
+            });
+        },
+        headers:{
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+});
+
+
+//Updating a Route
+function onRouteEdit(td) {
+    selectedRecord = td.parentElement.parentElement;
+    selectedRecordID = selectedRecord.cells[0].innerHTML;
+    document.getElementById("Route_name").value = selectedRecord.cells[1].innerHTML;
+    document.getElementById("Status").value = selectedRecord.cells[2].innerHTML;
+   
+}
+
+function updateRouteTableRecord(data) {
+    selectedRecord.cells[0].innerHTML = selectedRecordID;
+    selectedRecord.cells[1].innerHTML = data.Route_name;
+    selectedRecord.cells[2].innerHTML = data.Status;
     }
-  }
-})
-})
+
+
+function updateRouteFormRecord(data) {
+    var updateData = JSON.stringify(data);
+    $.ajax({
+        type: 'PUT',
+        url: baseUrl + "/routes/" + selectedRecordID,
+        dataType: 'json',
+        data: updateData,
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function () {
+            updateRouteTableRecord(data);
+        },
+        headers:{
+            Accept:"application/json; charset=utf-8",
+            Content_Type:"application/json; charset=utf-8",
+            'Access-Control-Allow-Credentials': true,
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+function clearRouteForm() {
+    document.getElementById("Route_name").value = "";
+    document.getElementById("Status").value = "";
+    
+}
+
+//---------------------------------End of Routes Router---------------------------------
+
+// // get all premises
+// $(document).ready(() => {
+// $.ajax({
+//     url: "http://localhost:5000/premises",
+//     method: 'GET',
+//     dataType : 'json',
+//     success: function(data){
+//       if(data.data.length > 0){
+//         console.log("Fetched premises");
+//           for(let index = 0; index < data.data.length; index++) {
+//             var newRow = $("<tr>");
+//             var cols = "";
+//             var PremiseId = '';
+//             var MeterNo = '';
+//             var Customerid = '';
+//             var Routeid = '';
+//             var createdAt = '';
+//             var updatedAt = '';
+//             cols += '<td> '+ data.data[index].PremiseId +'</td>';
+//             cols += '<td> '+ data.data[index].MeterNo +'</td>';
+//             cols += '<td> '+ data.data[index].Customerid+'</td>';
+//             cols += '<td> '+ data.data[index].Routeid+'</td>';
+//             cols += '<td> '+ data.data[index].createdAt+'</td>';
+//             cols += '<td> '+ data.data[index].updatedAt+'</td>';
+//             newRow.append(cols);
+//             $("#allpr .tbody").append(newRow);
+//           }
+//     }
+//   }
+// })
+// })
+
+
+// // get all clients/customers/members
+// // $(document).ready(() => {
+// // $.ajax({
+// //     url: "http://localhost:5000/members",
+// //     method: 'GET',
+// //     dataType : 'json',
+// //     success: function(data){
+// //       if(data.data.length > 0){
+// //         console.log("Fetched Clients");
+// //           for(let index = 0; index < data.data.length; index++) {
+// //             var newRow = $("<tr>");
+// //             var cols = "";
+// //             var Customerid = '';
+// //             var CustName = '';
+// //             var TelephoneNo = '';
+// //             var Email = '';
+// //             var createdAt = '';
+// //             var updatedAt = '';
+// //             cols += '<td> '+ data.data[index].Customerid +'</td>';
+// //             cols += '<td> '+ data.data[index].CustName +'</td>';
+// //             cols += '<td> '+ data.data[index].TelephoneNo+'</td>';
+// //             cols += '<td> '+ data.data[index].Email+'</td>';
+// //             cols += '<td> '+ data.data[index].createdAt+'</td>';
+// //             cols += '<td> '+ data.data[index].updatedAt+'</td>';
+// //             newRow.append(cols);
+// //             $("#allcl .tbody").append(newRow);
+// //           }
+// //     }
+// //   }
+// // })
+// // })
+
+// // get all routes
+// $(document).ready(() => {
+// $.ajax({
+//     url: "http://localhost:5000/routes", 
+//     method: 'GET',
+//     dataType : 'json',
+//     success: function(data){
+//       if(data.data.length > 0){
+//         console.log("Fetched routes");
+//           for(let index = 0; index < data.data.length; index++) {
+//             var newRow = $("<tr>");
+//             var cols = "";
+//             var Routeid = '';
+//             var Route_name = '';
+//             var Status = '';
+//             cols += '<td> '+ data.data[index].Routeid +'</td>';
+//             cols += '<td> '+ data.data[index].Route_name +'</td>';
+//             cols += '<td> '+ data.data[index].Status+'</td>';
+//             newRow.append(cols);
+//             $("#allro .tbody").append(newRow);
+//           }
+//     }
+//   }
+// })
+// })
 
 // get all bills
 $(document).ready(() => {
@@ -418,35 +783,35 @@ $.ajax({
 })
 })
 
-// get all billers
-$(document).ready(() => {
-$.ajax({
-    url: "http://localhost:5000/users", 
-    method: 'GET',
-    dataType : 'json',
-    success: function(data){
-      if(data.data.length > 0){
-        console.log("Fetched billers");
-          for(let index = 0; index < data.data.length; index++) {
-            var newRow = $("<tr>");
-            var cols = "";
-            var UserID = '';
-            var UserName = '';
-            var Email = '';
-            var createdAt = '';
-            var updatedAt = '';
-            cols += '<td> '+ data.data[index].UserID +'</td>';
-            cols += '<td> '+ data.data[index].UserName +'</td>';
-            cols += '<td> '+ data.data[index].Email+'</td>';
-            cols += '<td> '+ data.data[index].createdAt+'</td>';
-            cols += '<td> '+ data.data[index].updatedAt+'</td>';
-            newRow.append(cols);
-            $("#allus .tbody").append(newRow);
-          }
-    }
-  }
-})
-})
+// // get all billers
+// $(document).ready(() => {
+// $.ajax({
+//     url: "http://localhost:5000/users", 
+//     method: 'GET',
+//     dataType : 'json',
+//     success: function(data){
+//       if(data.data.length > 0){
+//         console.log("Fetched billers");
+//           for(let index = 0; index < data.data.length; index++) {
+//             var newRow = $("<tr>");
+//             var cols = "";
+//             var UserID = '';
+//             var UserName = '';
+//             var Email = '';
+//             var createdAt = '';
+//             var updatedAt = '';
+//             cols += '<td> '+ data.data[index].UserID +'</td>';
+//             cols += '<td> '+ data.data[index].UserName +'</td>';
+//             cols += '<td> '+ data.data[index].Email+'</td>';
+//             cols += '<td> '+ data.data[index].createdAt+'</td>';
+//             cols += '<td> '+ data.data[index].updatedAt+'</td>';
+//             newRow.append(cols);
+//             $("#allus .tbody").append(newRow);
+//           }
+//     }
+//   }
+// })
+// })
 
 
 // premise IDs for select - bills
