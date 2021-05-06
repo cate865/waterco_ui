@@ -33,7 +33,11 @@
     </nav>
 
     <div class="allbills">
-        <button style="color: black; margin-bottom: 1%;">Sort by premise</button>
+        <form >
+            <input type="number" name="Prid" placeholder="Payment id..." id="Prid" />
+            <input type="submit" onclick="event.preventDefault(); onPrIdInput();" value="Sort By Premise" style="margin: 0;"/>
+            <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
+        </form>
         <table id="allpa">
             <thead>
                 <tr>

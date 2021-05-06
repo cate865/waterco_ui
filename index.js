@@ -19,7 +19,7 @@ function getCookie(name) {
         and compare it with the given string */
         if(name == cookiePair[0].trim()) {
             // Decode the cookie value and return
-            console.log('some random cookieeeeee'+ decodeURIComponent(cookiePair[1]))
+            console.log('cookie:'+ decodeURIComponent(cookiePair[1]))
             return decodeURIComponent(cookiePair[1]);
         }
     }
@@ -142,6 +142,34 @@ $(document).ready(function () {
         }
     });
 });
+
+// View one User
+function onUserIdSubmit() {
+    var pid = document.getElementById("Userid").value;
+    viewOneUser(pid);
+
+}
+
+function viewOneUser(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/users/" + id,
+        cache: false,
+        success: function (response) {
+            console.log(response.message);
+            console.log(id);
+            $("#allus tbody tr").remove();
+            var data = response.data;
+            data.forEach((user) => {
+                addUserRecordToTable(user);
+            });
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
 
 // Updating a user
 function onUserEdit(td) {
@@ -292,6 +320,33 @@ $(document).ready(function () {
     });
 });
 
+// View one Member
+function onMemberIdSubmit() {
+    var pid = document.getElementById("Custid").value;
+    viewOneMember(pid);
+
+}
+
+function viewOneMember(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/members/" + id,
+        cache: false,
+        success: function (response) {
+            console.log(response.message);
+            console.log(id);
+            $("#memberslist tbody tr").remove();
+            var data = response.data;
+            data.forEach((Member) => {
+                addMemberRecordToTable(Member);
+            });
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
 
 //Updating a member
 function onMemberEdit(td) {
@@ -444,12 +499,97 @@ $(document).ready(function () {
                 addPremiseRecordToTable(Premise);
             });
         },
-        headers:{
+        headers: {
             Authorization: `token ${getCookie('authToken')}`
         }
     });
+
+
 });
 
+// Getting all premises by a member
+function onMemberIdInput() {
+    var pid = document.getElementById("Clientid").value;
+    sortByMember(pid);
+
+}
+
+function sortByMember(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/premises/member/" + id,
+        cache: false,
+        success: function (response) {
+            console.log(response.message);
+            console.log(id);
+            $("#Premiseslist tbody tr").remove();
+            var data = response.data;
+            data.forEach((Premise) => {
+                addPremiseRecordToTable(Premise);
+            });
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+// Getting all premises by route
+function onRouteIdInput() {
+    var pid = document.getElementById("Clientid").value;
+    sortByRoute(pid);
+
+}
+
+function sortByRoute(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/premises/route/" + id,
+        cache: false,
+        success: function (response) {
+            console.log(response.message);
+            console.log(id);
+            $("#Premiseslist tbody tr").remove();
+            var data = response.data;
+            data.forEach((Premise) => {
+                addPremiseRecordToTable(Premise);
+            });
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+// View one Premise
+function onPremiseIdInput() {
+    var pid = document.getElementById("Clientid").value;
+    viewOnePremise(pid);
+
+}
+
+function viewOnePremise(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/premises/" + id,
+        cache: false,
+        success: function (response) {
+            console.log(response.message);
+            console.log(id);
+            $("#Premiseslist tbody tr").remove();
+            var data = response.data;
+            data.forEach((Premise) => {
+                addPremiseRecordToTable(Premise);
+            });
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
 
 //Updating a Premise
 function onPremiseEdit(td) {
@@ -620,135 +760,9 @@ function clearRouteForm() {
     
 }
 
-//---------------------------------End of Routes Router---------------------------------
+//---------------------------------End of Routes Router-------------------------------------------------
 
-// // get all premises
-// $(document).ready(() => {
-// $.ajax({
-//     url: "http://localhost:5000/premises",
-//     method: 'GET',
-//     dataType : 'json',
-//     success: function(data){
-//       if(data.data.length > 0){
-//         console.log("Fetched premises");
-//           for(let index = 0; index < data.data.length; index++) {
-//             var newRow = $("<tr>");
-//             var cols = "";
-//             var PremiseId = '';
-//             var MeterNo = '';
-//             var Customerid = '';
-//             var Routeid = '';
-//             var createdAt = '';
-//             var updatedAt = '';
-//             cols += '<td> '+ data.data[index].PremiseId +'</td>';
-//             cols += '<td> '+ data.data[index].MeterNo +'</td>';
-//             cols += '<td> '+ data.data[index].Customerid+'</td>';
-//             cols += '<td> '+ data.data[index].Routeid+'</td>';
-//             cols += '<td> '+ data.data[index].createdAt+'</td>';
-//             cols += '<td> '+ data.data[index].updatedAt+'</td>';
-//             newRow.append(cols);
-//             $("#allpr .tbody").append(newRow);
-//           }
-//     }
-//   }
-// })
-// })
-
-
-// // get all clients/customers/members
-// // $(document).ready(() => {
-// // $.ajax({
-// //     url: "http://localhost:5000/members",
-// //     method: 'GET',
-// //     dataType : 'json',
-// //     success: function(data){
-// //       if(data.data.length > 0){
-// //         console.log("Fetched Clients");
-// //           for(let index = 0; index < data.data.length; index++) {
-// //             var newRow = $("<tr>");
-// //             var cols = "";
-// //             var Customerid = '';
-// //             var CustName = '';
-// //             var TelephoneNo = '';
-// //             var Email = '';
-// //             var createdAt = '';
-// //             var updatedAt = '';
-// //             cols += '<td> '+ data.data[index].Customerid +'</td>';
-// //             cols += '<td> '+ data.data[index].CustName +'</td>';
-// //             cols += '<td> '+ data.data[index].TelephoneNo+'</td>';
-// //             cols += '<td> '+ data.data[index].Email+'</td>';
-// //             cols += '<td> '+ data.data[index].createdAt+'</td>';
-// //             cols += '<td> '+ data.data[index].updatedAt+'</td>';
-// //             newRow.append(cols);
-// //             $("#allcl .tbody").append(newRow);
-// //           }
-// //     }
-// //   }
-// // })
-// // })
-
-// // get all routes
-// $(document).ready(() => {
-// $.ajax({
-//     url: "http://localhost:5000/routes", 
-//     method: 'GET',
-//     dataType : 'json',
-//     success: function(data){
-//       if(data.data.length > 0){
-//         console.log("Fetched routes");
-//           for(let index = 0; index < data.data.length; index++) {
-//             var newRow = $("<tr>");
-//             var cols = "";
-//             var Routeid = '';
-//             var Route_name = '';
-//             var Status = '';
-//             cols += '<td> '+ data.data[index].Routeid +'</td>';
-//             cols += '<td> '+ data.data[index].Route_name +'</td>';
-//             cols += '<td> '+ data.data[index].Status+'</td>';
-//             newRow.append(cols);
-//             $("#allro .tbody").append(newRow);
-//           }
-//     }
-//   }
-// })
-// })
-
-// get all bills
-$(document).ready(() => {
-$.ajax({
-    url: "http://localhost:5000/bills", 
-    method: 'GET',
-    dataType : 'json',
-    success: function(data){
-      if(data.data.length > 0){
-        console.log("Fetched bills");
-          for(let index = 0; index < data.data.length; index++) {
-            var newRow = $("<tr>");
-            var cols = "";
-            var billid = '';
-            var PremiseId = '';
-            var UserID = '';
-            var Reading = '';
-            var Amount = '';
-            var Status = '';
-            var createdAt = '';
-            var newAmount = numberWithCommas(data.data[index].Amount);
-            cols += '<td> '+ data.data[index].billid +'</td>';
-            cols += '<td> '+ data.data[index].PremiseId +'</td>';
-            cols += '<td> '+ data.data[index].UserID+'</td>';
-            cols += '<td> '+ data.data[index].Reading+'</td>';
-            cols += '<td> '+ newAmount+'</td>';
-            cols += '<td> '+ data.data[index].Status+'</td>';
-            cols += '<td> '+ data.data[index].createdAt+'</td>';
-            newRow.append(cols);
-            $("#allbi .tbody").append(newRow);
-          }
-    }
-  }
-})
-})
-
-
+//-----------------------------------------------Beginning of Payments Router--------------------------------------------
 // get all payments
 $(document).ready(() => {
 $.ajax({
@@ -782,38 +796,92 @@ $.ajax({
   }
 })
 })
+//View Payment by Premise
+function onPrIdInput() {
+    var pid = document.getElementById("Prid").value;
+    sortbyPremise(pid);
 
-// // get all billers
-// $(document).ready(() => {
-// $.ajax({
-//     url: "http://localhost:5000/users", 
-//     method: 'GET',
-//     dataType : 'json',
-//     success: function(data){
-//       if(data.data.length > 0){
-//         console.log("Fetched billers");
-//           for(let index = 0; index < data.data.length; index++) {
-//             var newRow = $("<tr>");
-//             var cols = "";
-//             var UserID = '';
-//             var UserName = '';
-//             var Email = '';
-//             var createdAt = '';
-//             var updatedAt = '';
-//             cols += '<td> '+ data.data[index].UserID +'</td>';
-//             cols += '<td> '+ data.data[index].UserName +'</td>';
-//             cols += '<td> '+ data.data[index].Email+'</td>';
-//             cols += '<td> '+ data.data[index].createdAt+'</td>';
-//             cols += '<td> '+ data.data[index].updatedAt+'</td>';
-//             newRow.append(cols);
-//             $("#allus .tbody").append(newRow);
-//           }
-//     }
-//   }
-// })
-// })
+}
 
+function sortbyPremise(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/payments/premise/" + id,
+        cache: false,
+        success: function (data) {
+            console.log(id);
+            $("#allpa tbody tr").remove();
+            if(data.data.length > 0){
+                console.log("Fetched payments");
+                  for(let index = 0; index < data.data.length; index++) {
+                    var newRow = $("<tr>");
+                    var cols = "";
+                    var TransactionID = '';
+                    var billid = '';
+                    var PremiseId = '';
+                    var ExpectedAmount = '';
+                    var PaidAmount = '';
+                    var createdAt = '';
+                    var newExpected = numberWithCommas(data.data[index].ExpectedAmount);
+                    var newPaidAmount = numberWithCommas(data.data[index].PaidAmount);
+                    cols += '<td> '+ data.data[index].TransactionID +'</td>';
+                    cols += '<td> '+ data.data[index].billid +'</td>';
+                    cols += '<td> '+ data.data[index].PremiseId+'</td>';
+                    cols += '<td> '+ newExpected+'</td>';
+                    cols += '<td> '+ newPaidAmount+'</td>';
+                    cols += '<td> '+ data.data[index].createdAt+'</td>';
+                    newRow.append(cols);
+                    $("#allpa .tbody").append(newRow);
+                  }
+            }
+            
+            
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
 
+}
+
+//------------------------------------------End of Payments Router------------------------------------------------------
+//------------------------------------------Beginning of Bills Router---------------------------------------------------
+// Get all bills
+$(document).ready(() => {
+    $.ajax({
+        url: "http://localhost:5000/bills", 
+        method: 'GET',
+        dataType : 'json',
+        success: function(data){
+          if(data.data.length > 0){
+            console.log("Fetched bills");
+              for(let index = 0; index < data.data.length; index++) {
+                var newRow = $("<tr>");
+                var cols = "";
+                var billid = '';
+                var PremiseId = '';
+                var UserID = '';
+                var Reading = '';
+                var Amount = '';
+                var Status = '';
+                var createdAt = '';
+                var newAmount = numberWithCommas(data.data[index].Amount);
+                cols += '<td> '+ data.data[index].billid +'</td>';
+                cols += '<td> '+ data.data[index].PremiseId +'</td>';
+                cols += '<td> '+ data.data[index].UserID+'</td>';
+                cols += '<td> '+ data.data[index].Reading+'</td>';
+                cols += '<td> '+ newAmount+'</td>';
+                cols += '<td> '+ data.data[index].Status+'</td>';
+                cols += '<td> '+ data.data[index].createdAt+'</td>';
+                newRow.append(cols);
+                $("#allbi .tbody").append(newRow);
+              }
+        }
+      }
+    })
+    })
+
+// Capture a Bill
 // premise IDs for select - bills
 $(document).ready(() => {
 $.ajax({
@@ -852,3 +920,53 @@ $.ajax({
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
+
+//View a bill
+function onBillIdInput() {
+    var pid = document.getElementById("Billid").value;
+    viewOneBill(pid);
+
+}
+
+function viewOneBill(id) {
+    $.ajax({
+        type: "GET",
+        url: baseUrl + "/bills/" + id,
+        cache: false,
+        success: function (data) {
+            $("#allbi tbody tr").remove();
+            if(data.data.length > 0){
+                console.log("Fetched bills");
+                  for(let index = 0; index < data.data.length; index++) {
+                    var newRow = $("<tr>");
+                    var cols = "";
+                    var billid = '';
+                    var PremiseId = '';
+                    var UserID = '';
+                    var Reading = '';
+                    var Amount = '';
+                    var Status = '';
+                    var createdAt = '';
+                    var newAmount = numberWithCommas(data.data[index].Amount);
+                    cols += '<td> '+ data.data[index].billid +'</td>';
+                    cols += '<td> '+ data.data[index].PremiseId +'</td>';
+                    cols += '<td> '+ data.data[index].UserID+'</td>';
+                    cols += '<td> '+ data.data[index].Reading+'</td>';
+                    cols += '<td> '+ newAmount+'</td>';
+                    cols += '<td> '+ data.data[index].Status+'</td>';
+                    cols += '<td> '+ data.data[index].createdAt+'</td>';
+                    newRow.append(cols);
+                    $("#allbi .tbody").append(newRow);
+                  }
+            }
+            
+            
+        },
+        headers: {
+            Authorization: `token ${getCookie('authToken')}`
+        }
+    });
+
+}
+
+//-----------------------------------------------End of Bills Router-----------------------------------------------------

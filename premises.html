@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./index.css">
     <title>Premises</title>
 </head>
+
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -32,35 +34,42 @@
 
     <div id="login-box">
         <div class="left">
-          <h1>Add Premise</h1>
-          <form onsubmit="event.preventDefault(); onPremiseFormSubmit();">
-            <input type="number" name="MeterNo" placeholder="Meter ..." id="MeterNo" />
-            <input type="number" name="Customerid" placeholder="Customerid ..." id="Customerid"/>
-            <input type="number" name="Routeid" placeholder="RID ..." id="Routeid"/>
-            <input type="submit" value="Add Premise" style="margin: 0;">
-            <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
-          </form>
+            <h1>Add Premise</h1>
+            <form onsubmit="event.preventDefault(); onPremiseFormSubmit();">
+                <input type="number" name="MeterNo" placeholder="Meter ..." id="MeterNo" />
+                <input type="number" name="Customerid" placeholder="Customerid ..." id="Customerid" />
+                <input type="number" name="Routeid" placeholder="RID ..." id="Routeid" />
+                <input type="submit" value="Add Premise" style="margin: 0;">
+                <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
+            </form>
         </div>
-      </div>
+    </div>
 
     <div class="allpremises">
         <!-- <a href="./addpremise.html" style="text-decoration: none; color: white; background-color: #16a085;">Add a Premise</a> -->
         <h2>All Premises</h2>
-        <button style="color: black; margin-bottom: 1%;">Sort by client</button>
+        <form >
+            <input type="number" name="Clientid" placeholder="ID..." id="Clientid" />
+            <input type="submit" onclick="event.preventDefault(); onPremiseIdInput();" value="View One" style="margin: 0;"/>
+            <input type="submit" onclick="event.preventDefault(); onMemberIdInput();" value="Sort by Member" style="margin: 0;"/>
+            <input type="submit" onclick="event.preventDefault(); onRouteIdInput();" value="Sort by Route" style="margin: 0;"/>
+            <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
+        </form>
+        <!-- <button style="color: black; margin-bottom: 1%;">Sort by client</button> -->
         <table id="Premiseslist">
             <thead>
-                <tr>
-                    <th>PremiseID</th>
-                    <th>MeterNo</th>
-                    <th>Customerid</th>
-                    <th>Routeid</th>
-                    <th>Creation Date</th>
-                    <th>Last Update</th>
-                    <th>View</th>
-                </tr>
+                <!-- <tr> -->
+                <th>PremiseID</th>
+                <th>MeterNo</th>
+                <th>Customerid</th>
+                <th>Routeid</th>
+                <th>Creation Date</th>
+                <th>Last Update</th>
+                <th>View</th>
+                <!-- </tr> -->
             </thead>
 
-            <tbody class="tbody" style="color: black;" >
+            <tbody class="tbody" style="color: black;">
             </tbody>
         </table>
     </div>
@@ -68,6 +77,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="./index.js"></script>
-    
+
 </body>
+
 </html>

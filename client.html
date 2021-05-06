@@ -47,6 +47,11 @@
     <div class="allclients">
         <!-- <a href="./addclient.html" style="text-decoration: none; color: white; background-color: #16a085;">Add a Client</a> -->
         <h2>All Clients</h2>
+        <form >
+            <input type="number" name="Custid" placeholder="Member id..." id="Custid" />
+            <input type="submit" onclick="event.preventDefault(); onMemberIdSubmit();" value="View One" style="margin: 0;"/>
+            <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
+        </form>
         <table id="memberslist">
             <thead>
                 <tr>
