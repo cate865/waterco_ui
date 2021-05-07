@@ -4,7 +4,7 @@
 
 var selectedRecord = null;
 var selectedRecordID = null;
-var baseUrl = "https://watercorw.herokuapp.com";
+var baseUrl = "http://localhost:5000";
 
 // Get cookie
 function getCookie(name) {
