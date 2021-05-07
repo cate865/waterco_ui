@@ -56,7 +56,8 @@ input {
 label {}
 
 select {
-    width: 70px;
+    width: 100px;
+    margin-bottom: 10px;
 }
 
 input [type="submit"] {
@@ -82,5 +83,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #loginbox {
-    display: hidden;
+    display: none;
+}
+
+#Status {
+    display: none;
 }

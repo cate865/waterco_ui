@@ -37,7 +37,11 @@
             <h1>Add Route</h1>
             <form onsubmit="event.preventDefault(); onRouteFormSubmit();">
                 <input type="text" name="Route_name" placeholder=" Name ..." id="Route_name" />
-                <input type="submit" value="Add Route" style="margin: 0;">
+                <select name="Status" id="Status">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <input type="submit" value="Add Route" style="margin: 0;" id="submit">
             </form>
         </div>
     </div>

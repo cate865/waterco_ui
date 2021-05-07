@@ -776,6 +776,7 @@ function addRouteRecordToTable(data) {
 }
  
 function onRouteFormSubmit() {
+    document.getElementById("Status").style.display = "none";
     var formData = {};
     formData["Route_name"] = document.getElementById("Route_name").value;
 
@@ -783,6 +784,7 @@ function onRouteFormSubmit() {
         saveRouteFormData(formData);
         alert("Route Added Successfully");
     } else {
+        formData["Status"] = document.getElementById("Status").value;
         updateRouteFormRecord(formData);
         alert("Route Edited Successfully");
     }
@@ -837,10 +839,12 @@ $(document).ready(function () {
 
 //Updating a Route
 function onRouteEdit(td) {
+    document.getElementById("Status").style.display = "block";
     selectedRecord = td.parentElement.parentElement;
     selectedRecordID = selectedRecord.cells[0].innerHTML;
     document.getElementById("Route_name").value = selectedRecord.cells[1].innerHTML;
     document.getElementById("Status").value = selectedRecord.cells[2].innerHTML;
+    document.getElementById("submit").value = "Update Route";
    
 }
 
