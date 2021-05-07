@@ -5,25 +5,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./dashboard.css">
     <title>Water Company</title>
 </head>
 
 <body>
+
     <div id="dashboard">
-        <h1 style="padding-left: 50px;"><strong>Dashboard</strong></h1>
-        <ul>
-            <li><a href="./client.html">View Clients</a></li>
-            <li><a href="./premises.html">View Premises</a></li>
-            <li><a href="./routes.html">View Routes</a></li>
-            <li><a href="./bill.html">View Routes</a></li>
-            <li><a href="./payment.html">View Payments</a></li>
-            <li><a href="./billers.html">View Billers</a></li>
-            <li><a href="./newbiller.html">Create Biller</a></li>
-            <li><a href="./loginbiller.html">Login</a></li>
-          </ul>
-          
+        <h1><strong>Welcome to The WaterCo Dashboard!</strong></h1>
+
+    </div>
+    <div class="dash">
+        <div class="row1">
+            <div class="clients">
+                <ul>
+                    <li><img src="./Images/customer.png" alt="customer" /></li>
+                    <li><a href="./client.html">View Clients</a></li>
+                </ul>
+
+            </div>
+            <div class="premises">
+                <ul>
+                    <li><img src="./Images/home.png" alt="premise" /></li>
+                    <li><a href="./premises.html">View Premises</a></li>
+                </ul>
+
+            </div>
+            <div class="routes">
+                <ul>
+                    <li><img src="./Images/split.png" alt="route" /></li>
+                    <li><a href="./routes.html">View Routes</a>
+                    </li>
+                </ul>
+
+
+            </div>
+
+        </div>
+        <div class="row2">
+            <div class="users">
+                <ul>
+                    <li><img src="./Images/user.png" alt="user" /></li>
+                    <li> <a href="./billers.html">View Billers</a></li>
+                </ul>
+
+
+
+            </div>
+            <div class="bills">
+                <ul>
+                    <li><img src="./Images/invoice.png" alt="bill" /></li>
+                    <li> <a href="./bill.html">View Bills</a></li>
+                </ul>
+
+            </div>
+            <div class="payments">
+                <ul>
+                    <li><img src="./Images/credit-card.png" alt="payment" /></li>
+                    <li><a href="./payment.html">View Payments</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row3">
+            <a href="./newbiller.html"> Sign Up</a>
+            <a href="./loginbiller.html"> Login</a>
+
+        </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
