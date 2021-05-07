@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./index.css">
     <title>Client</title>
 </head>
+
 <body>
- 
+
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -30,24 +34,25 @@
             </ul>
         </div>
     </nav>
-    
+
     <div id="login-box">
         <div class="left">
-          <h1>Add Client</h1>
-          <form onsubmit="event.preventDefault(); onMemberFormSubmit();">
-            <input type="text" name="CustName" placeholder=" Client Name ..." id="CustName" />
-            <input type="text" name="TelephoneNo" placeholder=" Client phone ..." id="TelephoneNo"/>
-            <input type="text" name="Email" placeholder=" Client email ..." id="Email"/>
-            <input type="submit" value="Add Client">
-          </form>
+            <h1>Add Client</h1>
+            <form onsubmit="event.preventDefault(); onMemberFormSubmit();">
+                <input type="text" name="CustName" placeholder=" Client Name ..." id="CustName" />
+                <input type="text" name="TelephoneNo" placeholder=" Client phone ..." id="TelephoneNo" />
+                <input type="text" name="Email" placeholder=" Client email ..." id="Email" />
+                <input type="submit" value="Add Client">
+            </form>
         </div>
-      </div>
+    </div>
 
     <div class="allclients">
         <h2>All Clients</h2>
-        <form >
+        <form>
             <input type="number" name="Custid" placeholder="Member id..." id="Custid" />
-            <input type="submit" onclick="event.preventDefault(); onMemberIdSubmit();" value="View One" style="margin: 0;"/>
+            <input type="submit" onclick="event.preventDefault(); onMemberIdSubmit();" value="View One"
+                style="margin: 0;" />
             <!-- <a href="./premises.html" style="text-decoration: none; color: white; background-color: #16a085;">All Premises</a> -->
         </form>
         <table id="memberslist">
@@ -62,7 +67,7 @@
             </thead>
             <tbody>
             </tbody>
-            
+
         </table>
     </div>
 
@@ -70,4 +75,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="./index.js"></script>
 </body>
+
 </html>

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./index.css">
     <title>Billing</title>
@@ -33,12 +35,14 @@
     </nav>
 
     <div class="allbills">
+        <h1>Capture Bill</h1>
         <form onsubmit="event.preventDefault(); onBillFormSubmit();" style="margin-bottom: 20px;">
             <input type="number" name="PremiseId" id="PremiseId" placeholder=" PremiseId ..." />
             <input type="number" name="UserID" id="UserID" placeholder=" User id ..." />
             <input type="number" name="Reading" id="Reading" placeholder=" Reading ..." />
             <input type="submit" name="signup_submit" value="Send Bill"/> <br>
         </form>
+        <h2>All Bills</h2>
         <form >
             <input type="number" name="Billid" placeholder="Bill id..." id="Billid" />
             <input type="submit" onclick="event.preventDefault(); onBillIdInput();" value="View One" style="margin: 0;"/>

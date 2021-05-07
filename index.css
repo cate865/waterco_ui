@@ -1,47 +1,49 @@
 body {
-    background-color: #181818;
-    color: black;
+    background-color: #fff;
+    color: #03045E;
     margin-left: 5%;
     margin-right: 5%;
+    font-family: 'Rubik', sans-serif;
 }
 
 table {
-    background-color: grey;
+    background-color: white;
     width: 100%;
     border-collapse: collapse;
     font-size: 20px;
+    border-color: #0096C7;
 }
 
 thead {
-    background-color: lightgrey;
+    background-color: #fff;
 }
 
 th {
     height: 30px;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 5px;
 }
 
 td {
     height: 30px;
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 5px;
 }
 
 tr:nth-child(even) {
-    background-color: rgb(129, 118, 118);
+    background-color: #fff;
 }
 
 tr {}
 
 tr:hover {
-    background-color: darkgrey;
+    background-color: #0096C7;
 }
 
 tbody {}
 
 form {
-    background-color: dimgrey;
+    background-color: #0496FF;
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 25px;
@@ -78,9 +80,10 @@ button {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #fff;
+    color: #0496FF;
 }
 
 #loginbox {
     display: hidden;
 }
+
