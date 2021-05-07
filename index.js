@@ -889,7 +889,7 @@ function clearRouteForm() {
 // get all payments
 $(document).ready(() => {
 $.ajax({
-    url: "http://localhost:5000/payments", 
+    url: baseUrl + "/payments", 
     method: 'GET',
     dataType : 'json',
     success: function(data){
@@ -972,7 +972,7 @@ function sortbyPremise(id) {
 // Get all bills
 $(document).ready(() => {
     $.ajax({
-        url: "http://localhost:5000/bills", 
+        url: baseUrl + "/bills/", 
         method: 'GET',
         dataType : 'json',
         success: function(data){
@@ -1008,7 +1008,7 @@ $(document).ready(() => {
 // premise IDs for select - bills
 $(document).ready(() => {
 $.ajax({
-    url: "http://localhost:5000/premises", 
+    url: baseUrl + "/premises", 
     method: 'GET',
     dataType : 'json',
     success: function(data){
@@ -1025,7 +1025,7 @@ $.ajax({
 // biller IDs for select - bills
 $(document).ready(() => {
 $.ajax({
-    url: "http://localhost:5000/users", 
+    url: baseUrl + "/users", 
     method: 'GET',
     dataType : 'json',
     success: function(data){
