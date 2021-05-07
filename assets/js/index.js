@@ -137,7 +137,7 @@ function onUserDetailsSubmitTwo() {
     formData["UserName"] = document.getElementById("UserName").value;
     formData["Password"] = document.getElementById("Password").value;
     addUser(formData);
-    window.location.href = "./index.html";
+    // window.location.href = "./index.html";
     clearUserForm();
 
 }
@@ -306,10 +306,10 @@ function onMemberFormSubmit() {
 
     if (selectedRecord == null) {
         saveMemberFormData(formData);
-        alert("Client Added Successfully");
+        // alert("Client Added Successfully");
     } else {
         updateMemberFormRecord(formData);
-        alert("Client Edited Successfully");
+        // alert("Client Edited Successfully");
     }
     clearMemberForm();
 }
@@ -346,7 +346,7 @@ function saveBillFormData(data) {
         contentType: "application/json; charset=utf-8",
         cache: false,
         success: function (response) {
-            alert("Bill generated and client notified");
+            alert("Bill generated successfully");
         },
         headers:{
             Accept:"application/json; charset=utf-8",
@@ -369,7 +369,7 @@ function savePayFormData(data) {
         cache: false,
         success: function (response) {
             console.log("Paid");
-            alert("Payment Successful. Thank You");
+            alert("Bill Payment Successful. Thank You");
             close();
         },
         headers:{
@@ -394,6 +394,7 @@ function saveMemberFormData(data) {
         success: function (response) {
             console.log(response.token);
             addMemberRecordToTable(response.data);
+            alert("Member was added successfully ");
            
         },
         headers:{
@@ -483,6 +484,7 @@ function updateMemberFormRecord(data) {
         cache: false,
         success: function () {
             updateMemberTableRecord(data);
+            alert("Member record edited successfully");
         },
         headers:{
             Accept:"application/json; charset=utf-8",
@@ -571,10 +573,10 @@ function onPremiseFormSubmit() {
 
     if (selectedRecord == null) {
         savePremiseFormData(formData);
-        alert("Premise Added Successfully");
+        // alert("Premise Added Successfully");
     } else {
         updatePremiseFormRecord(formData);
-        alert("Premise Edited Successfully");
+        // alert("Premise Edited Successfully");
     }
     clearPremiseForm();
 }
@@ -591,7 +593,7 @@ function savePremiseFormData(data) {
         cache: false,
         success: function (response) {
             addPremiseRecordToTable(response.data);
-           
+            alert("Member Premise added successfully");
             
         },
         headers:{
@@ -739,6 +741,7 @@ function updatePremiseFormRecord(data) {
         cache: false,
         success: function () {
             updatePremiseTableRecord(data);
+            alert("Member Premise edited successfully");
         },
         headers:{
             Accept:"application/json; charset=utf-8",
@@ -782,11 +785,11 @@ function onRouteFormSubmit() {
 
     if (selectedRecord == null) {
         saveRouteFormData(formData);
-        alert("Route Added Successfully");
+        // alert("Route Added Successfully");
     } else {
         formData["Status"] = document.getElementById("Status").value;
         updateRouteFormRecord(formData);
-        alert("Route Edited Successfully");
+        // alert("Route Edited Successfully");
     }
     clearRouteForm();
 }
@@ -803,7 +806,7 @@ function saveRouteFormData(data) {
         cache: false,
         success: function (response) {
             addRouteRecordToTable(response.data);
-           
+            alert("Route Record Added Successfully");
             
         },
         headers:{
@@ -866,6 +869,7 @@ function updateRouteFormRecord(data) {
         cache: false,
         success: function () {
             updateRouteTableRecord(data);
+            alert("Route Record Edited Successfully");
         },
         headers:{
             Accept:"application/json; charset=utf-8",
