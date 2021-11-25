@@ -9,7 +9,7 @@ Web API for Water Company in Kigali. The website enables billing of clients. It 
 * Capture Bills
 * Capture Payment
 
-Website URL -> 
+Website URL -> https://waterrw.herokuapp.com/
 
 Authors
 * Catherine Muthoni
